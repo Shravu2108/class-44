@@ -4,10 +4,12 @@ var suga,suga_Img;
 var which;
 var count=0;
 
+
 function preload(){
- blue_Img = loadAnimation("images/blue.jpg");
- suga_Img = loadAnimation("images/suga.png");
+ blue_Img = loadImage("images/blue.jpg");
+ suga_Img = loadImage("images/suga.png");
  groundImg = loadImage("images/bg.jpg");
+
 }
 
 function setup(){
@@ -19,24 +21,21 @@ function setup(){
 }
 function draw() {
   background("white");
+  
   if(ground.y>500){
     ground.y = ground.height/2;
   }
   spawnTiles();
   drawSprites();
-  textSize(15)
+  stroke("white")
+  textSize(30)
   fill("black")
-  text("score="+count, 0, 15);  
-  if (mousePressedOver(suga) && which==1) 
+  text("Score="+count, 820, 45);  
+  if (mousePressedOver(suga)) 
   {
-    count=count+1;
-    //suga.destroy();
-    suga.changeAnimation("suga1",blue_Img);
-    
-  }
-  if (mousePressedOver(suga) && which==2){
-    count=count-1;
-    //suga.destroy();
+   count=count+1; 
+   suga.changeImage("blue1");
+   suga.scale=0.5;
   }
 }
 
@@ -45,9 +44,8 @@ function spawnTiles(){
   which=Math.round(random(1,2));
   suga = createSprite(random(200,800), 0);
   suga.velocityY=8;
-  suga.addAnimation("suga1",suga_Img);
+  suga.addImage("suga1",suga_Img);
+  suga.addImage("blue1",blue_Img);
   suga.scale=0.1;
-    
-  }
-  
+  } 
 }
